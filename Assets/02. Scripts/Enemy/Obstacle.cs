@@ -10,18 +10,18 @@ public class Obstacle : MonoBehaviour
     public GameObject enemyPrefab;
     public bool isEnemy = false;
     public float speed = 5;
-    Enemy enemy;
+    private GameObject emergency;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
-        enemy = GetComponent<Enemy>();
+        emergency = GameObject.Find("Emergency");
     }
 
     private void Start()
     {
         move = new Vector3(player.position.x - 4, player.position.y, player.position.z);
-       
+        emergency.SetActive(false);
     }
 
     private void Update()
