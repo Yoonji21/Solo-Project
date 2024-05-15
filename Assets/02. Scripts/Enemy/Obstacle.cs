@@ -9,6 +9,7 @@ public class Obstacle : MonoBehaviour
     private Transform player;
     public GameObject enemyPrefab;
     public bool isEnemy = false;
+    public bool isCooltime;
     public float speed = 5;
     private GameObject emergency;
 
@@ -25,22 +26,27 @@ public class Obstacle : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isEnemy != true)
+        if (collision.gameObject.CompareTag("Player") && isEnemy != true && !isCooltime)
         {
             isEnemy = true;
-            StartCoroutine(emergencyCool());
-
             for (int i = 0; i < 5; i++)
             {
-                Instantiate(enemyPrefab, move, player.rotation);
+                emergency.SetActive(true);
+                GameObject gameObject2 = Instantiate(enemyPrefab, move, player.rotation);
+                StartCoroutine(emergencyCool(gameObject2));
             }
-        }
+        }                
     }
 
-    IEnumerator emergencyCool()
-    {            
-        emergency.SetActive(true);
-        yield return new WaitForSeconds(3); 
+    IEnumerator emergencyCool(GameObject gameObject)
+    {
+        Debug.Log("비활성화");
+        isCooltime = true;
+        yield return new WaitForSeconds(5f);
+        Debug.Log("비활성화2");
+        gameObject.SetActive(false);
+        isCooltime = false;
+
     }
 
 }

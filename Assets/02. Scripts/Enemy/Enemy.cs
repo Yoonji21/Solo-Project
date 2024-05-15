@@ -7,13 +7,14 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    private Transform target;
-    private float speed = 0;
+    Rigidbody2D rigid;
     private Vector3 moveDir;
+    private Transform target;
     private GameObject bulletPrefab;
+    private GameObject player;
     private bool isCoolTime;
     private bool isEnemy;
-    GameObject player;
+    private float speed = 0;
 
     private void Awake()
     {
@@ -21,6 +22,8 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
         isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy ;
         target = player.transform;
+        rigid = GetComponent<Rigidbody2D>();
+
     }
 
     private void Update()
@@ -33,7 +36,14 @@ public class Enemy : MonoBehaviour
         if (isEnemy == true)
         {
             transform.position += Vector3.right * speed * Time.deltaTime;
+        }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            rigid.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
         }
     }
 
@@ -54,8 +64,8 @@ public class Enemy : MonoBehaviour
         speed = 4;
         if (Vector3.Distance(target.position, transform.position) <= 6 && !isCoolTime)
         {
-                Instantiate(bulletPrefab, transform.position, transform.rotation);
-                StartCoroutine(FireCoroutine(0.3f));
+            Instantiate(bulletPrefab, transform.position, transform.rotation);
+            StartCoroutine(FireCoroutine(0.3f));
         }  
     }
 

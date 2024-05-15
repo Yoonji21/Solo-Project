@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-     private GameObject bulletPrefab;
-     private GameObject gun;
-     private GameObject gunPrefab;
+    private GameObject bulletPrefab;
+    private GameObject gun;
+    private GameObject gunPrefab;
     private GameObject player;
     public bool isTrue = false;
+    private Vector3 gunVet;
+    private Vector3 gunPrefabVet;
 
     private void Awake()
     {
@@ -16,6 +18,12 @@ public class Gun : MonoBehaviour
         gun = GameObject.Find("Gun");
         gunPrefab = GameObject.Find("GunObject");
         player = GameObject.Find("Player");
+    }
+
+    private void Start()
+    {
+        gunVet = new Vector3(-4.6f, gun.transform.position.y, gun.transform.position.z);
+        gunPrefabVet = new Vector3(-4.6f, gunPrefab.transform.position.y, gun.transform.position.z);
     }
 
     void Update()
@@ -29,12 +37,12 @@ public class Gun : MonoBehaviour
 
         if (isTrue == true && Input.GetKeyDown(KeyCode.F))
         {
-            Instantiate(bulletPrefab, gun.transform.position , gun.transform.rotation);
+            Instantiate(bulletPrefab, gunVet , gun.transform.rotation);
         }
 
         else if (isTrue == false && Input.GetKeyDown(KeyCode.F))
         {
-            Instantiate(bulletPrefab, gunPrefab.transform.position , gunPrefab.transform.rotation);
+            Instantiate(bulletPrefab, gunPrefabVet , gunPrefab.transform.rotation);
         }
     }   
 }
