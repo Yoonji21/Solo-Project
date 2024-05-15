@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class TextBox : MonoBehaviour
 {
-    private GameObject item;
     private GameObject baboo;
     private GameObject gunPopup;
     private GameObject gun;
+    private GameObject basicsGun;
     public GameObject gunPrefab;
-    private Transform player;
+    private bool isKey;
+    private bool isTrigger2 = false;
 
     private void Awake()
     {
-        item = GameObject.Find("Item");
         baboo = GameObject.Find("baboo");
         gunPopup = GameObject.Find("gunPopup");
         gun = GameObject.Find("GunObject");
-        player = GameObject.Find("Player").GetComponent<Transform>();
-
+        isKey = GameObject.Find("Player").GetComponent<Player>().isKey;
+        isTrigger2 = GameObject.Find("Player").GetComponent<Player>().isTrigger2;
+        basicsGun = GameObject.Find("Gun");
     }
 
     private void Start()
@@ -29,16 +30,16 @@ public class TextBox : MonoBehaviour
 
     private void Update()
     {
-        if (GameObject.Find("Player").GetComponent<Player>().isTrigger == true)
+        if (GameObject.Find("Player").GetComponent<Player>().isKey == true)
         {
             baboo.SetActive(true);
             StartCoroutine(Cool());
-            GameObject.Find("Player").GetComponent<Player>().isTrigger = false;
+            GameObject.Find("Player").GetComponent<Player>().isKey = false;
         }
 
         if (GameObject.Find("Player").GetComponent<Player>().isTrigger2 == true)
         {
-            Debug.Log("됐당");
+            Debug.Log("활성화");
             gunPopup.SetActive(true);
             GameObject.Find("Player").GetComponent<Player>().isTrigger2 = false;
         }
@@ -46,22 +47,19 @@ public class TextBox : MonoBehaviour
 
     public void YesOnClick()
     {
-        Debug.Log("예스");
         gunPopup.SetActive(false);
-        Destroy(GameObject.Find("Gun"));
+        Destroy(basicsGun);
         Gun gun1 = gun.AddComponent<Gun>();
     }
 
     public void NoOnClick()
     {
-        Debug.Log("노");
         gunPopup.SetActive(false);
     }
 
     IEnumerator Cool()
     {
         yield return new WaitForSeconds(3f);
-        Debug.Log("비활성화");
         baboo.SetActive(false);
     }
 }

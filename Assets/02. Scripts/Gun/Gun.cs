@@ -20,7 +20,7 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if(GameObject.Find("Gun") == true)
+        if(gun == true)
         {
             isTrue = true;
         }
@@ -29,7 +29,6 @@ public class Gun : MonoBehaviour
 
         if (isTrue == true && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("น฿ป็");
             Instantiate(bulletPrefab, gun.transform.position , gun.transform.rotation);
         }
 

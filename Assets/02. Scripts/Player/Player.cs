@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject Item;
     private bool getLay = false;
     private GameObject spawner;
-    public bool isTrigger { get; set; } = false;
-    public bool isTrigger2 { get; set; } = false;
+    public bool isKey = false;
+    public bool isTrigger2 = false;
+    public bool isKey2 = false;
 
 
     private void Awake()
@@ -81,10 +82,16 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Item"))
-        isTrigger = true;
+        if (collision.gameObject.CompareTag("Item"))
+        { 
+            isKey = true;
+            isKey2 = true;
+        }
+
         if (collision.gameObject.CompareTag("Gun"))
+        {
             isTrigger2 = true;
+        }
 
         if (collision.gameObject.CompareTag("Button"))
         {

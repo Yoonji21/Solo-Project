@@ -8,6 +8,8 @@ TagManager:
   - Item
   - Gun
   - Button
+  - Block
+  - Obstacle
   layers:
   - Default
   - TransparentFX

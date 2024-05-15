@@ -15,15 +15,12 @@ public class Spawner : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) )//&& blockPrefab[Random.Range(0, blockPrefab.Length)].transform.position.y == -1.3f*/)
         {
             Instantiate(blockPrefab[Random.Range(0, blockPrefab.Length)], spawner.position, spawner.rotation);
-            Debug.Log("뉴");
-
         }
     }
     private void StartNewBlock()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("스타트");
             Instantiate(blockPrefab[Random.Range(0, blockPrefab.Length)], spawner.position, spawner.rotation);
             count++;
         }
@@ -39,7 +36,6 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         
-        StartNewBlock();
     }
 
     void Update()
@@ -50,14 +46,19 @@ public class Spawner : MonoBehaviour
         {
             StartNewBlock();
         }
-        while (countBlock > 0)
+        else
         {
-            if (count > 0)
-            {
-                NewBlock();
-                count++;
-            }
+            NewBlock();
+
         }
-         
+        //for (int i = 10; i < countBlock; i--)
+        //{
+        //    if (count > 0)
+        //    {
+        //        NewBlock();
+        //        count++;
+        //    }
+        //}
+
     }
 }
