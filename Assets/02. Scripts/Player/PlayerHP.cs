@@ -37,6 +37,7 @@ public class PlayerHP : MonoBehaviour
             deathUI.SetActive(true);
             restart.SetActive(true);
         }
+
         else
         {
             Time.timeScale = 1;

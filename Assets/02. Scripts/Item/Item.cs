@@ -13,9 +13,7 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("°¨Áö");
             gameObject.SetActive(false);
-            
         }
     }
 }

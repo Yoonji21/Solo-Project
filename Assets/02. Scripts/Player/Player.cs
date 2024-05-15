@@ -31,11 +31,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
         Move();
         Slow();
         Jump();
-
     }
 
     private void Move()
@@ -51,7 +49,6 @@ public class Player : MonoBehaviour
             isJump = true;
             rigid.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
         }
-        
     }
 
     private void Slow()
@@ -62,8 +59,8 @@ public class Player : MonoBehaviour
             speed = 2;
             transform.rotation = Quaternion.Euler(0, 0, 90);
             Move();
-            
         }
+
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             getLay = false;

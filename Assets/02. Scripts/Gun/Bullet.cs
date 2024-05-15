@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            HP.playerHp -= 10;
+            HP.playerHp -= 5;
             Destroy(gameObject);
         }
     }

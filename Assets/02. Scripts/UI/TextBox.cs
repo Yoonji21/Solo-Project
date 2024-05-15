@@ -39,10 +39,10 @@ public class TextBox : MonoBehaviour
 
         if (GameObject.Find("Player").GetComponent<Player>().isTrigger2 == true)
         {
-            Debug.Log("È°¼ºÈ­");
             gunPopup.SetActive(true);
-            GameObject.Find("Player").GetComponent<Player>().isTrigger2 = false;
+            Time.timeScale = 0;
         }
+
     }
 
     public void YesOnClick()
@@ -50,11 +50,14 @@ public class TextBox : MonoBehaviour
         gunPopup.SetActive(false);
         Destroy(basicsGun);
         Gun gun1 = gun.AddComponent<Gun>();
+        GameObject.Find("Player").GetComponent<Player>().isTrigger2 = false;
+
     }
 
     public void NoOnClick()
     {
         gunPopup.SetActive(false);
+        GameObject.Find("Player").GetComponent<Player>().isTrigger2 = false;
     }
 
     IEnumerator Cool()

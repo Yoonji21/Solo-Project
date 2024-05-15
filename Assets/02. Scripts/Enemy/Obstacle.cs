@@ -23,23 +23,24 @@ public class Obstacle : MonoBehaviour
         move = new Vector3(player.position.x - 4, player.position.y, player.position.z);
         emergency.SetActive(false);
     }
-
-    private void Update()
-    {
-        Debug.Log("√‚µø !");
-    }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isEnemy == false)
+        if (collision.gameObject.CompareTag("Player") && isEnemy != true)
         {
             isEnemy = true;
+            StartCoroutine(emergencyCool());
+
             for (int i = 0; i < 5; i++)
             {
                 Instantiate(enemyPrefab, move, player.rotation);
             }
         }
-
-        
     }
+
+    IEnumerator emergencyCool()
+    {            
+        emergency.SetActive(true);
+        yield return new WaitForSeconds(3); 
+    }
+
 }
