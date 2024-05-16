@@ -5,13 +5,13 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     private Vector3 move;
-    private Vector3 moveDir;
     private Transform player;
     public GameObject enemyPrefab;
     public bool isEnemy = false;
     public bool isCooltime;
     public float speed = 5;
     private GameObject emergency;
+    GameObject gameObject2;
 
     private void Awake()
     {
@@ -32,21 +32,25 @@ public class Obstacle : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 emergency.SetActive(true);
-                GameObject gameObject2 = Instantiate(enemyPrefab, move, player.rotation);
-                StartCoroutine(emergencyCool(gameObject2));
+                StartCoroutine(emergencyCool());
+                StartCoroutine(enemyCool(gameObject2));
             }
         }                
     }
 
-    IEnumerator emergencyCool(GameObject gameObject)
+    IEnumerator enemyCool(GameObject gameObject)
     {
-        Debug.Log("비활성화");
         isCooltime = true;
-        yield return new WaitForSeconds(5f);
-        Debug.Log("비활성화2");
+        yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
         isCooltime = false;
-
+    }
+    IEnumerator emergencyCool()
+    {
+        isCooltime = true;
+        yield return new WaitForSeconds(3f);
+        GameObject gameObject2 = Instantiate(enemyPrefab, move, player.rotation);
+        isCooltime = false;
     }
 
 }

@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(target.position, transform.position) <= 6 && !isCoolTime)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
-            StartCoroutine(FireCoroutine(0.3f));
+            StartCoroutine(FireCoroutine(2f));
         }  
     }
 
