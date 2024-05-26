@@ -8,22 +8,21 @@ public class Obstacle : MonoBehaviour
     private Transform player;
     public GameObject enemyPrefab;
     public bool isEnemy = false;
-    public bool isCooltime;
-    public float speed = 5;
+    private bool isCooltime;
     private GameObject emergency;
-    GameObject gameObject2;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         emergency = GameObject.Find("Emergency");
+        emergency.SetActive(false);
     }
 
     private void Start()
     {
-        move = new Vector3(player.position.x - 4, player.position.y, player.position.z);
-        emergency.SetActive(false);
+        move = new Vector3(player.position.x - 4, player.position.y, player.position.z);       
     }
+
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && isEnemy != true && !isCooltime)
@@ -32,24 +31,24 @@ public class Obstacle : MonoBehaviour
             for (int i = 0; i < 5; i++)
             {
                 emergency.SetActive(true);
-                StartCoroutine(emergencyCool());
-                StartCoroutine(enemyCool(gameObject2));
+                StartCoroutine(Cool());
             }
-        }                
+        }
     }
 
-    IEnumerator enemyCool(GameObject gameObject)
+    //IEnumerator enemyCool(GameObject gameObject)
+    //{
+    //    isCooltime = true;
+    //    yield return new WaitForSeconds(3f);
+    //    //gameObject.SetActive(false);
+    //    isCooltime = false;
+    //}
+
+    IEnumerator Cool()
     {
         isCooltime = true;
         yield return new WaitForSeconds(3f);
-        gameObject.SetActive(false);
-        isCooltime = false;
-    }
-    IEnumerator emergencyCool()
-    {
-        isCooltime = true;
-        yield return new WaitForSeconds(3f);
-        GameObject gameObject2 = Instantiate(enemyPrefab, move, player.rotation);
+        Instantiate(enemyPrefab, move, player.rotation);
         isCooltime = false;
     }
 

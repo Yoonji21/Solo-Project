@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private bool isCoolTime;
     private bool isEnemy;
     private float speed = 0;
+    [SerializeField] private SOTest so;
 
     private void Awake()
     {
@@ -23,7 +24,11 @@ public class Enemy : MonoBehaviour
         isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy ;
         target = player.transform;
         rigid = GetComponent<Rigidbody2D>();
+    }
 
+    private void Start()
+    {
+        print(so.damage);
     }
 
     private void Update()

@@ -671,8 +671,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8948976366439856337, guid: 488e34f946eabca4da18fdde7078b568, type: 3}
   isEnemy: 0
-  isCooltime: 0
-  speed: 5
 --- !u!212 &351695782
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2266,7 +2264,7 @@ GameObject:
   - component: {fileID: 1508199325}
   - component: {fileID: 1508199324}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: BlockSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3464,7 +3462,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6210836765362225552, guid: 3809970cbc5c2e14fa531e799de3d37f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4405884748713189911, guid: 3809970cbc5c2e14fa531e799de3d37f, type: 3}

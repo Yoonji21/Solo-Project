@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rigid;
+    private Rigidbody2D rigid;
     private float jumpForce = 5;
     private float speed = 5;
     private Vector3 moveDir;
@@ -16,16 +16,15 @@ public class Player : MonoBehaviour
     public bool isTrigger2 = false;
     public bool isKey2 = false;
 
-
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
         spawner = GameObject.Find("Spawner");
         spawner.SetActive(false);
     }
 
     void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
         isJump = false;
     }
 
@@ -39,7 +38,7 @@ public class Player : MonoBehaviour
     private void Move()
     {
         moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, 0);
-        transform.position += moveDir * speed * Time.deltaTime;
+        rigid.velocity = moveDir * speed;
     }
 
     private void Jump()
