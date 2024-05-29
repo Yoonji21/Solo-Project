@@ -17,7 +17,6 @@ public class FireSkill : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemy = collision.GetComponent<Enemy>();
-            enemy.EnemyDamage(13);
             gameObject.SetActive(gameObject);
         }
     }

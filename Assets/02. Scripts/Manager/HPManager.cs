@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HPManager : MonoBehaviour
 {
-    private float enemyHp;
+    private float enemyHp = 100f;
     public float EnemyHp
     {
         get
@@ -16,7 +16,14 @@ public class HPManager : MonoBehaviour
             enemyHp = value;
         }
     }
+
+    private Enemy enemy;
     [SerializeField] private GameObject enemyPrefab;
+
+    private void Awake()
+    {
+        enemy = GetComponent<Enemy>();
+    }
 
     //public static HPManager instance = null;
 
@@ -32,17 +39,8 @@ public class HPManager : MonoBehaviour
     //    }
     //}
 
-    public void Damage(float damage)
-    {
-        enemyHp -= damage;
-        print($"АјАн {enemyHp}");
-    }
-
     private void Update()
     {
-        if (enemyHp < 1)
-        {
-            enemyPrefab.SetActive(false);
-        }
+        
     }
 }

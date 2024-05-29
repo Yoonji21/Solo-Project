@@ -22,11 +22,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     [Range(0, 20)]
     private float jumpPower;
-    float enemyHp = 100;
-    [SerializeField] private float speed = 3; private void OnDrawGizmos()
-    {
-        gizmos();
-    }
+    public float enemyHp = 100;
+    [SerializeField] private float speed = 3;
+    
 
     private void Awake()
     {
@@ -41,6 +39,11 @@ public class Enemy : MonoBehaviour
         CheackGround();
         moveDir = player.transform.position - transform.position;
         rigid.velocity = new Vector2( moveDir.x , rigid.velocity.y);
+
+        if (enemyHp < 1)
+        {
+            gameObject.SetActive(false);
+        }
 
         Idle();
         Attack();
@@ -80,9 +83,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void EnemyDamage(float damage)
+    public void EnemyDamage()
     {
-        enemyHp -= damage;
+        enemyHp -= 30;
+        print("½ÇÇà");
     }
 
     private void CheackGround()
@@ -100,12 +104,5 @@ public class Enemy : MonoBehaviour
         isCoolTime = true;
         yield return new WaitForSeconds(cooltime);
         isCoolTime = false;
-    }
-
-    void gizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position + Vector3.down, transform.position + Vector3.down + Vector3.right * Ray);
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * Ray);
     }
 }

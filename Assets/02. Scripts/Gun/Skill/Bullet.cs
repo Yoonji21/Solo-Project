@@ -10,4 +10,15 @@ public class Bullet : MonoBehaviour
     {
         transform.position += transform.right * speed * Time.deltaTime;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            enemy.EnemyDamage();
+            gameObject.SetActive(false);
+            print("체력감소");
+        }
+    }
 }
