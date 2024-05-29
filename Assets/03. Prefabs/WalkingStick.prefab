@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4405884748713189911}
   - component: {fileID: 5022049289561303207}
   - component: {fileID: 1672079677750243248}
-  - component: {fileID: 6210836765362225552}
+  - component: {fileID: 1449619558767213209}
   m_Layer: 0
-  m_Name: GunObject
+  m_Name: WalkingStick
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479213660866964123}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.07, y: -1.4, z: 0}
-  m_LocalScale: {x: 0.89707434, y: 0.2789, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.12370655, y: 1.0291688, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
 --- !u!212 &5022049289561303207
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4037736, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.381132, g: 0.2415307, b: 0.12584543, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6210836765362225552
+--- !u!114 &1449619558767213209
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1479213660866964123}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f8acd354123451498f1ab67529963db, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c5f0bcc6dd499b419f0b0071036560c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireSkillPrefab: {fileID: 8369009795473243041, guid: 764c9d90262cd2e448fd2f057e1fbcb7, type: 3}
+  player: {fileID: 5192303618261163350, guid: 02dcfe4d418759d4985d6fcc591420b3, type: 3}

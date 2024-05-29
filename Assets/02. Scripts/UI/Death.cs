@@ -16,7 +16,7 @@ public class Death : MonoBehaviour
     {
         restartButton = GameObject.Find("Restart");
         player = GameObject.Find("Player").transform;
-        isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy;
+        //isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy;
     }
 
     private void Start()
@@ -29,7 +29,7 @@ public class Death : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && isEnemy == true)
+        if (collision.gameObject.CompareTag("Player") /*&& isEnemy == true*/)
         {
             gameObject.SetActive(true);
             restartButton.SetActive(true);

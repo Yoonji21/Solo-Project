@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player").GetComponent<Transform>();
-        spawner = GameObject.Find("Spawner").GetComponent<Transform>();
+        spawner = GameObject.Find("BlockSpawner").GetComponent<Transform>();
     }
 
     private void Start()

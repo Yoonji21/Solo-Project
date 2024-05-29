@@ -6,21 +6,21 @@ public class Obstacle : MonoBehaviour
 {
     private Vector3 move;
     private Transform player;
-    public GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
+    private GameObject enemyObj;
     public bool isEnemy = false;
     private bool isCooltime;
-    private GameObject emergency;
+    [SerializeField] private GameObject emergency;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
-        emergency = GameObject.Find("Emergency");
         emergency.SetActive(false);
     }
 
-    private void Start()
+    private void Update()
     {
-        move = new Vector3(player.position.x - 4, player.position.y, player.position.z);       
+        move = new Vector3(player.position.x - 4, player.position.y, player.position.z);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -28,28 +28,27 @@ public class Obstacle : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && isEnemy != true && !isCooltime)
         {
             isEnemy = true;
-            for (int i = 0; i < 5; i++)
-            {
-                emergency.SetActive(true);
-                StartCoroutine(Cool());
-            }
+            
+            emergency.SetActive(true); 
+            StartCoroutine(Cool());
         }
     }
 
-    //IEnumerator enemyCool(GameObject gameObject)
-    //{
-    //    isCooltime = true;
-    //    yield return new WaitForSeconds(3f);
-    //    //gameObject.SetActive(false);
-    //    isCooltime = false;
-    //}
-
+    
     IEnumerator Cool()
     {
         isCooltime = true;
         yield return new WaitForSeconds(3f);
-        Instantiate(enemyPrefab, move, player.rotation);
-        isCooltime = false;
+        //Instantiate(enemyPrefab, move, player.rotation);
+        EnemySpawner.instance.SpawnEnemy();
+        DeleteCool();
     }
 
+    IEnumerator DeleteCool()
+    {
+        isCooltime = true;
+        yield return new WaitForSeconds(3f);
+        enemyObj.SetActive(false);
+        isCooltime = false;
+    }
 }

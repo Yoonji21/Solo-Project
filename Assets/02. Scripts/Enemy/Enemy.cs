@@ -7,49 +7,44 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rigid;
+    private Rigidbody2D rigid;
     private Vector3 moveDir;
     private Transform target;
-    private GameObject bulletPrefab;
+    [SerializeField] private GameObject bulletPrefab;
     private GameObject player;
     private bool isCoolTime;
     private bool isEnemy;
-    private float speed = 0;
-    [SerializeField] private SOTest so;
+    private bool isGround;
+    private bool isObstacle;
+    [SerializeField] private float Ray = 1;
+    [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private LayerMask whatIsObstacle;
+    [SerializeField]
+    [Range(0, 20)]
+    private float jumpPower;
+    float enemyHp = 100;
+    [SerializeField] private float speed = 3; private void OnDrawGizmos()
+    {
+        gizmos();
+    }
 
     private void Awake()
     {
-        bulletPrefab = GameObject.Find("Bullet");
         player = GameObject.Find("Player");
         isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy ;
         target = player.transform;
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
-    {
-        print(so.damage);
-    }
-
     private void Update()
     {
-        transform.position += moveDir * speed * Time.deltaTime;
+        CheackGround();
+        moveDir = player.transform.position - transform.position;
+        rigid.velocity = new Vector2( moveDir.x , rigid.velocity.y);
+
         Idle();
         Attack();
         Run();
-        
-        if (isEnemy == true)
-        {
-            transform.position += Vector3.right * speed * Time.deltaTime;
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            rigid.AddForce(Vector3.up * 4, ForceMode2D.Impulse);
-        }
     }
 
     private void Attack()
@@ -57,21 +52,19 @@ public class Enemy : MonoBehaviour
         speed = 0;
         if (Vector3.Distance(target.transform.position, transform.position) > 2 && Vector3.Distance(target.transform.position, transform.position) < 7)
         {
-            speed = 4;
+            speed = 3;
             moveDir = player.transform.position - transform.position;
-            moveDir.Normalize();
+
         }
     }
 
     public void Run()
     {
-        
-        speed = 4;
         if (Vector3.Distance(target.position, transform.position) <= 6 && !isCoolTime)
         {
             Instantiate(bulletPrefab, transform.position, transform.rotation);
             StartCoroutine(FireCoroutine(2f));
-        }  
+        }
     }
 
     private void Idle()
@@ -87,10 +80,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void EnemyDamage(float damage)
+    {
+        enemyHp -= damage;
+    }
+
+    private void CheackGround()
+    {
+        isObstacle = Physics2D.Raycast(transform.position + Vector3.down, Vector3.right, Ray, whatIsObstacle);
+        isGround = Physics2D.Raycast(transform.position, Vector3.down, Ray, whatIsGround);
+        if (isObstacle && isGround)
+        {
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpPower);
+        }
+    }
+
     IEnumerator FireCoroutine(float cooltime)
     {
         isCoolTime = true;
         yield return new WaitForSeconds(cooltime);
         isCoolTime = false;
+    }
+
+    void gizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position + Vector3.down, transform.position + Vector3.down + Vector3.right * Ray);
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * Ray);
     }
 }

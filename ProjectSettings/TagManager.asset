@@ -10,6 +10,7 @@ TagManager:
   - Button
   - Block
   - Obstacle
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,9 +19,9 @@ TagManager:
   - Water
   - UI
   - Ray
+  - Ground
   - 
-  - 
-  - 
+  - Obstacle
   - 
   - 
   - 

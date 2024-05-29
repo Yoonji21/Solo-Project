@@ -1,16 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class Bullet : MonoBehaviour
+
+public class IceSkill : MonoBehaviour
 {
-    private float speed = 15;
-    PlayerHP HP;
- 
-    private void Awake()
-    {
-        HP = GameObject.Find("Player").GetComponent<PlayerHP>();
-    }
+    [SerializeField] private float speed = 25;
+    private HPManager hpManager;
 
     void Update()
     {
@@ -19,10 +14,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            HP.playerHp -= 5;
+            hpManager.EnemyHp -= 11;
             Destroy(gameObject);
+            print($"얼음공격 {hpManager.EnemyHp}");
         }
     }
 }

@@ -7,18 +7,21 @@ public class PlayerHP : MonoBehaviour
 {
     public float playerHp = 100f;
     public Text playerHpUI;
-    private GameObject deathUI;
-    private GameObject restart;
+    [SerializeField] private GameObject deathUI;
+    [SerializeField] private GameObject restart;
 
-    private static PlayerHP Instance = null;
+    public static PlayerHP instance = null;
 
     private void Awake()
     {
-        deathUI = GameObject.Find("Death");
-        restart = GameObject.Find("Restart");
-        if (Instance == null)
+        
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -31,7 +34,7 @@ public class PlayerHP : MonoBehaviour
     {
         SetHp(playerHp);
 
-        if (playerHp == 0)
+        if (playerHp < 1)
         {
             Time.timeScale = 0;
             deathUI.SetActive(true);
