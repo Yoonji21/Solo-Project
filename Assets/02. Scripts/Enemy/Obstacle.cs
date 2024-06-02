@@ -41,14 +41,5 @@ public class Obstacle : MonoBehaviour
         yield return new WaitForSeconds(3f);
         //Instantiate(enemyPrefab, move, player.rotation);
         EnemySpawner.instance.SpawnEnemy();
-        DeleteCool();
-    }
-
-    IEnumerator DeleteCool()
-    {
-        isCooltime = true;
-        yield return new WaitForSeconds(3f);
-        enemyObj.SetActive(false);
-        isCooltime = false;
     }
 }

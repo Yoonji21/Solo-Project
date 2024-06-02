@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public static EnemySpawner instance = null;
     public Stack<GameObject> EnemyPool = new Stack<GameObject>();
     [SerializeField] private GameObject enemyPrefab;
-    private GameObject enemyObj;
+    public GameObject enemyObj;
     private Vector3 moveDir;
     private Transform player;
 
@@ -56,5 +56,16 @@ public class EnemySpawner : MonoBehaviour
             EnemyPool.Push(enemy);
             enemy.SetActive(false);
         }
+    }
+
+    IEnumerator DeleteCool()
+    {
+        yield return new WaitForSeconds(3f);
+        for (int i = 0; i < 5; i++)
+        {
+            EnemySpawner.instance.enemyObj.SetActive(false);
+
+        }
+        //isCoolTime = false;
     }
 }
