@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class PlayerHP : MonoBehaviour
 {
@@ -11,6 +12,14 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private GameObject restart;
 
     public static PlayerHP instance = null;
+
+    public UnityEvent onPlayerDead;
+
+    private void Dead()
+    {
+        onPlayerDead.Invoke();
+    }
+
 
     private void Awake()
     {
@@ -37,8 +46,9 @@ public class PlayerHP : MonoBehaviour
         if (playerHp < 1)
         {
             Time.timeScale = 0;
-            deathUI.SetActive(true);
-            restart.SetActive(true);
+            Dead();
+            //deathUI.SetActive(true);
+            //restart.SetActive(true);
         }
 
         else

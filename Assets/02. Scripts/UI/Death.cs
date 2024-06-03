@@ -17,12 +17,12 @@ public class Death : MonoBehaviour
         restartButton = GameObject.Find("Restart");
         player = GameObject.Find("Player").transform;
         //isEnemy = GameObject.Find("Obstacle").GetComponent<Obstacle>().isEnemy;
+        gameObject.SetActive(false);
+        restartButton.SetActive(false);
     }
 
     private void Start()
     {
-        gameObject.SetActive(false);
-        restartButton.SetActive(false);
         moveDir = player.position - transform.position;
         moveDir.Normalize();
     }
